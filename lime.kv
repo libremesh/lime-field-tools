@@ -1,0 +1,69 @@
+#:kivy 1.9.0
+
+<SignalMonitor>:
+    stations_spinner: stations_spinner
+    interfaces_spinner: interfaces_spinner
+    host_input: host_input
+
+    canvas.before:
+        Color:
+            rgb: root.quality_color
+        Line:
+            rectangle: self.x+1,self.y+1,self.width-1,self.height-2
+            width: 44
+
+        Color:
+            rgba: 0, 1, 0, root.quality_color[1]
+        Rectangle:
+            pos: (self.width-44, 44*1)
+            size: (44, 44)
+
+        Color:
+            rgba: 1, 0, 0, root.quality_color[0]
+        Rectangle:
+            pos: (self.width-44, 0)
+            size: (44, 44)
+
+    Image:
+        pos: (root.width-44, 44)
+        size_hint: None, None
+        size: 44, 44
+        source: 'data/thumbs_up_sign.png'
+        color: [1, 1, 1, root.quality_color[1]*root.quality_color[1]]
+
+    Image:
+        pos: (root.width-44, 0)
+        size_hint: None, None
+        size: 44, 44
+        source: 'data/thumbs_down_sign.png'
+        color: [1, 1, 1, root.quality_color[0]*root.quality_color[0]]
+
+    Label:
+        font_size: 300  
+        center_x: root.center_x
+        center_y: root.center_y
+        text: str(root.signal)
+
+    TextInput:
+        id: host_input
+        text: root.host
+        size: (140, 44)
+        keyboard_suggestions: False
+        center_x: root.center_x-70
+        center_y: root.height-22
+
+    Spinner:
+        id: interfaces_spinner
+        text: "wlan1-adhoc"
+        values: root.available_interfaces
+        size: (140, 44)
+        center_x: root.center_x+70
+        center_y: root.height-22
+
+    Spinner:
+        id: stations_spinner
+        text: "Node"
+        values: root.target_stations
+        size: (200, 44)
+        center_x: root.center_x
+
